@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-import Home from "./components/Home";
-import Random from "./components/Random";
-import Search from "./components/Search";
-import About from "./components/About";
-import Nav from "./components/Nav";
+import Home from "./components/home/Home";
+import Random from "./components/random/Random";
+import Search from "./components/search/Search";
+import About from "./components/about/About";
+import Nav from "./components/nav/Nav";
 import Register from "./components/Register";
 import fire from "./config/Fire";
-import Login from "./components/Login";
+import Login from "./components/login/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends React.Component {

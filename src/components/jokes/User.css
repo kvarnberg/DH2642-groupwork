@@ -1,0 +1,21 @@
+
+.user{
+    margin-top: 40px;
+}
+
+table{
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 30px;
+}
+
+
+td {
+    padding: 15px;
+    text-align: left;
+  }
+
+tr:hover{
+    background-color: rgb(247, 231, 231);
+}
+

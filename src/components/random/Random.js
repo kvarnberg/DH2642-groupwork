@@ -1,16 +1,18 @@
 import React from "react";
 import loading from "../../loading.svg";
 import "../../App.css";
+import Nav from "../nav/Nav";
 
 function Random() {
   return (
-    <div className="App">
+    <div className="Random">
+      <Nav />
       <header className="App-header">
         <img src={loading} className="App-loading" alt="loading" />
         <button className="btn" onClick={refreshPage}>
           Get random joke
         </button>
-        <h1>show random joke here via FetchRandom</h1>
+        <h1>show joke here</h1>
       </header>
     </div>
   );

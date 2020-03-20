@@ -1,23 +1,15 @@
 import React from "react";
 import "../../App.css";
-import fire from "../../config/Fire";
+import Nav from "../nav/Nav";
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
-
-  logout() {
-    fire.auth().signOut();
-  }
-
   render() {
     return (
       <div>
+        <Nav />
         <h1>Home page</h1>
         <h3>You are now logged in</h3>
-        <button onClick={this.logout}>Logout</button>
+        <div>Other users jokes:</div>
       </div>
     );
   }

@@ -1,26 +1,95 @@
-import React from "react";
-import "../../App.css";
+//IMPORT
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect, useRef } from "react";
+import { Form, ListGroup } from "react-bootstrap";
+import Nav from "../nav/Nav";
+import firebase from "firebase";
 
-class Search extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      clicked: false
-    };
-  }
+//EXPORT
+export default function Search() {
+  //STATE
+  const [jokes, setJokes] = useState([]);
+  const [query, setQuery] = useState("");
+  const user = localStorage.user;
 
-  doThis = () => {
-    this.setState({ clicked: !this.state.clicked });
+  //REF STORES A REFERENCE TO A DOM NODE
+  const FocusOnSearch = useRef(null);
+  //ACCESS TO A CHILD'D DOM NODE FROM A PARENT COMPONENT
+  useEffect(() => {
+    FocusOnSearch.current.focus();
+  }, []);
+
+  //GETTING THE API
+  const getJokes = async query => {
+    var url = `https://icanhazdadjoke.com/search?term=${query}`;
+    const results = await fetch(url, {
+      headers: { accept: "application/json" }
+    });
+    const jokes = await results.json();
+    return jokes.results;
   };
 
-  render() {
-    return (
-      <div className="Search">
-        <button onClick={this.doThis}>Dogs</button>
-        <div>{this.state.clicked ? <h1>dogs clicked</h1> : null}</div>
-      </div>
-    );
-  }
-}
+  //EFFECT PERFORMS SIDE EFFECTS IN FUNCTION COMPONENTS
+  useEffect(() => {
+    let currentQuery = true;
 
-export default Search;
+    //---
+    const loadJokes = async () => {
+      //IF QUERY != NONE RETURN THE EXISTING JOKES WITH THAT WORD
+      if (!query) return setJokes([]);
+      //ALWAYS FIND A JOKE WITH THE WORD THAT THE USER HAS ENTERED
+      if (currentQuery) {
+        const jokes = await getJokes(query);
+        setJokes(jokes);
+      }
+    };
+    //---
+
+    //RUN ABOVE
+    loadJokes();
+
+    //ENTER AN INPUT FOR THE QUERY
+  }, [query]);
+
+  //SHOW LIST OF JOKES(EVERY JOKE IN A BOX) WHEN ENTERING A WORD
+  let jokeComponents = jokes.map(AllResultsFromTheApi => {
+    return (
+      <ListGroup.Item>
+        {AllResultsFromTheApi.joke}
+        <button onClick={() => onAdd(AllResultsFromTheApi)}>Save</button>
+      </ListGroup.Item>
+    );
+  });
+
+  const onAdd = joke => {
+    const db = firebase.firestore();
+    db.collection("users")
+      .doc(user)
+      .collection("savedjokes")
+      .add({ content: joke.joke, apiId: joke.id });
+  };
+
+  //STYLING THE RESULT
+  const mystyle = {
+    color: "black",
+    backgroundColor: "white",
+    padding: "10px",
+    fontFamily: "Times"
+  };
+
+  //SHOW THE RESULT
+  return (
+    <div>
+      <Nav />
+      <h4 style={mystyle}>Search For A Joke</h4>
+      <Form.Control
+        style={mystyle}
+        placeholder="Search for a Joke..."
+        ref={FocusOnSearch}
+        onChange={e => setQuery(e.target.value)}
+        value={query}
+      />
+      <div style={mystyle}>{jokeComponents}</div>
+    </div>
+  );
+}

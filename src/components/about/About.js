@@ -1,8 +1,14 @@
 import React from "react";
 import "../../App.css";
+import Nav from "../nav/Nav";
 
 function About() {
-  return <div className="App">about</div>;
+  return (
+    <div>
+      <Nav />
+      <div className="App">about</div>
+    </div>
+  );
 }
 
 export default About;

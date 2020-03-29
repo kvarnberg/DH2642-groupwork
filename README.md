@@ -17,6 +17,7 @@ What you have done so far:
  - Login authentication from firebase
  - Database storage in firebase
  - Hosting in firebase via: https://project-joke-6bbc1.web.app/
+ - to test the application, please sign up a user. you can use a fake email, it doesn't matter.
  
 What you still plan to do:
 - We plan to fix the initial rendering of the loginpage. When the component mounts, it is delayed and shows the other pages (reserved for logged in users) for a millisecond. It has something to do with links and routers we assume, but has not yet found a working solution to the problem.

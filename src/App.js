@@ -56,7 +56,7 @@ class App extends React.Component {
       .then(u => {
         db.collection("users")
           .doc(u.user.uid)
-          .set({ user: u.user.id, name: u.user.email });
+          .set({ user: u.user.uid, name: u.user.email });
       })
       .catch(error => {
         alert(error);

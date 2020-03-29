@@ -1,0 +1,73 @@
+
+.header{
+  font-weight: 300;
+
+}
+
+.page-header__title {
+    font-weight: 300;
+    margin: 0;
+
+  
+  }
+  
+  .content-container {
+    margin: 0 auto;
+    padding: 15px;
+    max-width: 50rem;
+  }
+  
+  .added-jokes{
+  flex: right}
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width:400px;
+    height: 400px;
+    /* background-color: blue; */
+    float: left
+  }
+  
+  .text-input {
+    border: 1px solid #cacccd;
+    height: 50px;
+    font-weight: 300;
+    padding: 10px;
+  }
+  
+  .textarea {
+    height: 10rem;
+    padding: 15px;
+  }
+  
+  .button {
+    margin-top: 20px;
+    background: rgb(219, 112, 130);
+    border: none;
+    color: white;
+    display: inline-block;
+    font-weight: 300;
+    line-height: 1;
+    padding: 20px;
+    text-decoration: none;
+  }
+
+  
+table{
+  margin-left:auto; 
+  margin-right:auto;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+
+td {
+  padding: 15px;
+  text-align: left;
+}
+
+tr:hover{
+  background-color: rgb(247, 231, 231);
+}
+

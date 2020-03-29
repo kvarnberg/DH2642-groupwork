@@ -1,0 +1,19 @@
+.jokes{
+    margin:20px;
+    text-decoration: none;
+    list-style-type:none;
+    margin-left: 20%;
+    margin-right: 20%;
+
+
+}
+
+.trashButton{
+    float: right;
+}
+
+.user{
+    margin-top: 2%;
+    font-size: 22px;
+    font-weight: bold;
+}

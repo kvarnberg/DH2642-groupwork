@@ -1,8 +1,7 @@
 import React from "react";
-import firebase from "firebase";
 import Nav from "../nav/Nav";
-import trashIcon from "./trash.png";
 import { ListGroup } from "react-bootstrap";
+import { db } from "../../config/Fire";
 import "./User.css";
 
 const JokeInput = ({ joke }) => {
@@ -10,12 +9,17 @@ const JokeInput = ({ joke }) => {
   const user = localStorage.user;
 
   const onDelete = () => {
-    const db = firebase.firestore();
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
       .doc(joke.id)
-      .delete();
+      .delete()
+      .then(() => {
+        alert("Joke has been deleted");
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -36,7 +40,6 @@ function Jokes() {
   const user = localStorage.user;
 
   React.useEffect(() => {
-    const db = firebase.firestore();
     return db
       .collection("users")
       .doc(user)
@@ -49,11 +52,17 @@ function Jokes() {
   }, [user]);
 
   const onCreate = () => {
-    const db = firebase.firestore();
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
-      .add({ content: newJokeContent });
+      .add({ content: newJokeContent })
+      .then(() => {
+        alert("Joke has been added");
+        window.location = "/";
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
 
   const myStyle = {

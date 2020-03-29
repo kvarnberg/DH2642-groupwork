@@ -1,53 +1,55 @@
 import React from "react";
-import loading from "../../loading.svg";
 import "../../App.css";
 import Nav from "../nav/Nav";
+import { db } from "../../config/Fire";
 
 function Random() {
   return (
     <div className="Random">
       <Nav />
       <header className="App-header">
-        <img src={loading} className="App-loading" alt="loading" />
-        <button className="btn" onClick={refreshPage}>
-          Get random joke
-        </button>
-        <h1>show joke here</h1>
+        <FetchRandom />
       </header>
     </div>
   );
 }
 
-/*class FetchRandom extends React.Component {
+class FetchRandom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      setup: "",
-      punchline: "",
-      onClick: false
+      joke: "",
+      id: ""
     };
-    this.displayPunch = this.displayPunch.bind(this);
   }
 
   async componentDidMount() {
-    const url =
-      "https://us-central1-dadsofunny.cloudfunctions.net/DadJokes/random/jokes";
-    const response = await fetch(url);
+    const url = "https://icanhazdadjoke.com/";
+    const response = await fetch(url, {
+      headers: { accept: "application/json" }
+    });
     const data = await response.json();
     this.setState({
       loading: false,
-      setup: data.setup,
-      punchline: data.punchline
+      joke: data.joke,
+      id: data.id
     });
-    console.log(data);
   }
 
-  displayPunch() {
-    this.setState({
-      onClick: !this.state.onClick
-    });
-  }
+  addToUser = () => {
+    const user = localStorage.user;
+    db.collection("users")
+      .doc(user)
+      .collection("savedjokes")
+      .add({ content: this.state.joke, apiId: this.state.id })
+      .then(() => {
+        alert("Joke has been added");
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  };
 
   render() {
     return (
@@ -56,17 +58,20 @@ function Random() {
           <div>loading...</div>
         ) : (
           <div>
-            <div>{this.state.setup}</div>
-            <button className="smolbtn" onClick={this.displayPunch}>
-              {this.state.onClick ? "Hide answer" : "Show answer"}
-            </button>
-            {this.state.onClick ? <div>{this.state.punchline}</div> : <></>}
+            <div>{this.state.joke}</div>
           </div>
         )}
+        <button className="smolbtn" onClick={refreshPage}>
+          Get another random joke
+        </button>
+        <br></br>
+        <button className="smolbtn" onClick={this.addToUser}>
+          Save this joke
+        </button>
       </div>
     );
   }
-}*/
+}
 
 function refreshPage() {
   window.location.reload();

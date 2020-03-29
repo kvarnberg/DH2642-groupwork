@@ -12,6 +12,7 @@ class Login extends React.Component {
             name="email"
             placeholder="enter email"
           ></input>
+          <br></br>
           <input
             value={this.props.password}
             onChange={this.props.handleChange}
@@ -19,16 +20,11 @@ class Login extends React.Component {
             name="password"
             placeholder="enter password"
           ></input>
-          <input
-            value={this.props.name}
-            onChange={this.props.handleChange}
-            type="name"
-            name="name"
-            placeholder="enter name"
-          ></input>
+          <br></br>
           <button type="submit" onClick={this.props.login}>
             Login
           </button>
+          <br></br>
           <button onClick={this.props.signup}>Signup</button>
         </form>
       </div>

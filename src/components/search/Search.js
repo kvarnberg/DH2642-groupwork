@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect, useRef } from "react";
 import { Form, ListGroup } from "react-bootstrap";
 import Nav from "../nav/Nav";
-import firebase from "firebase";
+import { db } from "../../config/Fire";
 
 //EXPORT
 export default function Search() {
@@ -62,11 +62,16 @@ export default function Search() {
   });
 
   const onAdd = joke => {
-    const db = firebase.firestore();
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
-      .add({ content: joke.joke, apiId: joke.id });
+      .add({ content: joke.joke, apiId: joke.id })
+      .then(() => {
+        alert("Joke has been added");
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
 
   //STYLING THE RESULT

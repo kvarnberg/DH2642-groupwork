@@ -1,8 +1,8 @@
 import React from "react";
 import "../../App.css";
 import Nav from "../nav/Nav";
-import "./profile.css"
-import firebase from "firebase"
+import "./profile.css";
+import { db } from "../../config/Fire";
 import { ListGroup } from "react-bootstrap";
 import trash from './bin.png'
 import "./profile.css"
@@ -15,7 +15,6 @@ const JokeInput = ({ joke }) => {
   const user = localStorage.user;
 
   const onDelete = () => {
-    const db = firebase.firestore();
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
@@ -26,7 +25,8 @@ const JokeInput = ({ joke }) => {
   return (
     <ListGroup.Item action hover="true">
       {content}
-      <img className="trashButton"
+      <img
+        className="trashButton"
         alt="delete button"
         style={{ height: "15px" }}
         src={trash}
@@ -54,14 +54,15 @@ function Profile() {
   //console.log(email.data)
 
   React.useEffect(() => {
-    const db = firebase.firestore();
     return db
       .collection("users")
       .doc(user)
       .collection("savedjokes")
-      .onSnapshot(snapshot => {
+      .onSnapshot((snapshot) => {
         const jokesData = [];
-        snapshot.forEach(doc => jokesData.push({ ...doc.data(), id: doc.id }));
+        snapshot.forEach((doc) =>
+          jokesData.push({ ...doc.data(), id: doc.id })
+        );
         setJokes(jokesData);
       });
   }, [user]);
@@ -79,18 +80,14 @@ function Profile() {
         <br></br>
       </div>
       <div className="jokes">
-
-        {jokes.map(joke => (
+        {jokes.map((joke) => (
           <div key={joke.id}>
             <JokeInput joke={joke} />
           </div>
         ))}
-
       </div>
     </div>
   );
 }
 
 export default Profile;
-
-

@@ -20,20 +20,20 @@ class FetchRandom extends React.Component {
     this.state = {
       loading: true,
       joke: "",
-      id: ""
+      id: "",
     };
   }
 
   async componentDidMount() {
     const url = "https://icanhazdadjoke.com/";
     const response = await fetch(url, {
-      headers: { accept: "application/json" }
+      headers: { accept: "application/json" },
     });
     const data = await response.json();
     this.setState({
       loading: false,
       joke: data.joke,
-      id: data.id
+      id: data.id,
     });
   }
 
@@ -42,11 +42,12 @@ class FetchRandom extends React.Component {
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
-      .add({ content: this.state.joke, apiId: this.state.id })
+      .doc(this.state.id)
+      .set({ content: this.state.joke, apiId: this.state.id })
       .then(() => {
         alert("Joke has been added");
       })
-      .catch(error => {
+      .catch((error) => {
         alert(error.message);
       });
   };

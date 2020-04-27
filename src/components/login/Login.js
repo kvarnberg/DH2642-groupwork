@@ -1,9 +1,11 @@
 import React from "react";
+import PublicNav from "../nav/PublicNav";
 
 class Login extends React.Component {
   render() {
     return (
       <div>
+        <PublicNav />
         <form id="signForm">
           <input
             value={this.props.email}

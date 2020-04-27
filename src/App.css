@@ -61,3 +61,7 @@
 .smolbtn:hover {
   background: lightskyblue;
 }
+
+.title {
+  border-radius: 10px;
+}

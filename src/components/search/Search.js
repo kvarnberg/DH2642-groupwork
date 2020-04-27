@@ -54,7 +54,7 @@ export default function Search() {
   //SHOW LIST OF JOKES(EVERY JOKE IN A BOX) WHEN ENTERING A WORD
   let jokeComponents = jokes.map(AllResultsFromTheApi => {
     return (
-      <ListGroup.Item>
+      <ListGroup.Item key={AllResultsFromTheApi.id}>
         {AllResultsFromTheApi.joke}
         <button onClick={() => onAdd(AllResultsFromTheApi)}>Save</button>
       </ListGroup.Item>
@@ -65,7 +65,8 @@ export default function Search() {
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
-      .add({ content: joke.joke, apiId: joke.id })
+      .doc(joke.id)
+      .set({ content: joke.joke, apiId: joke.id })
       .then(() => {
         alert("Joke has been added");
       })

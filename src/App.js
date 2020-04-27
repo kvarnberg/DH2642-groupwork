@@ -6,6 +6,7 @@ import Search from "./components/search/Search";
 import Profile from "./components/about/Profile";
 import Login from "./components/login/Login";
 import JokeMaker from "./components/jokemaker/JokeMaker";
+import About from "./components/about/About";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { db, auth } from "./config/Fire";
 
@@ -15,7 +16,7 @@ class App extends React.Component {
     this.state = {
       user: {},
       email: "",
-      password: ""
+      password: "",
     };
   }
 
@@ -24,7 +25,7 @@ class App extends React.Component {
   }
 
   authListener() {
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged((user) => {
       // console.log(user);
       if (user) {
         this.setState({ user });
@@ -37,33 +38,33 @@ class App extends React.Component {
     });
   }
 
-  login = e => {
+  login = (e) => {
     e.preventDefault();
     auth
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {
+      .then((u) => {
         console.log(u.user.uid);
       })
-      .catch(error => {
+      .catch((error) => {
         alert(error);
       });
   };
 
-  signup = e => {
+  signup = (e) => {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {
+      .then((u) => {
         db.collection("users")
           .doc(u.user.uid)
           .set({ user: u.user.uid, name: u.user.email });
       })
-      .catch(error => {
+      .catch((error) => {
         alert(error);
       });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -75,7 +76,8 @@ class App extends React.Component {
             <Switch>
               <Route
                 path="/"
-                render={props => (
+                exact
+                render={(props) => (
                   <Login
                     {...props}
                     email={this.state.email}
@@ -85,7 +87,8 @@ class App extends React.Component {
                     handleChange={this.handleChange}
                   />
                 )}
-              ></Route>
+              />
+              <Route path="/about" component={About} />
             </Switch>
           </Router>
         ) : (
@@ -96,10 +99,10 @@ class App extends React.Component {
               <Route path="/search" component={Search} />
               <Route path="/profile" component={Profile} />
               <Route path="/jokes" component={JokeMaker} />
-              <Route
+              {/* <Route 
                 path="*"
                 component={() => "404 NOT FOUND IN THIS APP-UNIVERSE"}
-              />
+              /> */}
             </Switch>
           </Router>
         )}

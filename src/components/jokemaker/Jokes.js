@@ -1,9 +1,8 @@
 import React from "react";
 import firebase from "firebase";
-import Nav from "../nav/Nav";
 import trashIcon from "./trash.png";
 import { ListGroup } from "react-bootstrap";
-import "./addjoke.css"
+import "./addjoke.css";
 
 const JokeInput = ({ joke }) => {
   const content = joke.content;
@@ -22,7 +21,7 @@ const JokeInput = ({ joke }) => {
     <table>
       <tr>
         <td>
-          {content + '    '}
+          {content + "    "}
           <img
             style={{ height: "18px" }}
             src={trashIcon}
@@ -47,9 +46,11 @@ function Jokes() {
       .collection("users")
       .doc(user)
       .collection("savedjokes")
-      .onSnapshot(snapshot => {
+      .onSnapshot((snapshot) => {
         const jokesData = [];
-        snapshot.forEach(doc => jokesData.push({ ...doc.data(), id: doc.id }));
+        snapshot.forEach((doc) =>
+          jokesData.push({ ...doc.data(), id: doc.id })
+        );
         setJokes(jokesData);
       });
   }, [user]);
@@ -59,64 +60,53 @@ function Jokes() {
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
-      .add({ content: newJokeContent + ' ' });
+      .add({ content: newJokeContent + " " });
   };
 
   const myStyle = {
-    flexDirection: "column"
+    flexDirection: "column",
   };
 
-
   return (
-
     <div className="content-container">
-   
-    <div className='form' >
-    <h3 className='header'>Add a joke</h3>
-    
+      <div className="form">
+        <h3 className="header">Add a joke</h3>
 
-      <input
-        type="text"
-        placeholder="   Enter your name"
-        autoFocus
-        className="text-input"
-      />
-      
-      <input
+        <input
+          type="text"
+          placeholder="   Enter your name"
+          autoFocus
+          className="text-input"
+        />
+
+        <input
           type="text"
           placeholder="   Category of joke"
           className="text-input"
-         
         />
 
-      <textarea
-        placeholder="Enter your joke here"
-        className="textarea"
-        value={newJokeContent}
-        onChange={
-          e => setNewJokeContent(e.target.value)}
-    
-      />
-      <div>
-        <button className='button' onClick={
-          onCreate}>Add Joke!</button>
+        <textarea
+          placeholder="Enter your joke here"
+          className="textarea"
+          value={newJokeContent}
+          onChange={(e) => setNewJokeContent(e.target.value)}
+        />
+        <div>
+          <button className="button" onClick={onCreate}>
+            Add Joke!
+          </button>
+        </div>
       </div>
-    </div>
 
-    
-    
-        <h3 className= 'header'>Your added jokes</h3>
+      <h3 className="header">Your added jokes</h3>
       <table>
-        {jokes.map(joke => (
+        {jokes.map((joke) => (
           <tbody style={myStyle} key={joke.id}>
             <JokeInput joke={joke} />
           </tbody>
         ))}
       </table>
     </div>
-   
-
-   
   );
 }
 

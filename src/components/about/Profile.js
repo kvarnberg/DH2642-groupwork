@@ -6,6 +6,7 @@ import firebase from "firebase"
 import { ListGroup } from "react-bootstrap";
 import trash from './bin.png'
 import "./profile.css"
+import { db } from "../../config/Fire";
 
 
 
@@ -27,7 +28,7 @@ const JokeInput = ({ joke }) => {
       {content}
       <img className="trashButton"
         alt="delete button"
-        style={{height:"15px"}}
+        style={{ height: "15px" }}
         src={trash}
         onClick={onDelete}
       />
@@ -39,7 +40,16 @@ function Profile() {
   const [jokes, setJokes] = React.useState([]);
   const user = localStorage.user;
   // hämta namn och email
-  const email = firebase.firestore().collection('users').doc(user).get()
+  db.collection("users")
+    .doc(user)
+    .get()
+    .then(function (doc) {
+      if (doc.exists) {
+        localStorage.setItem("email", doc.data().name);
+      } else {
+        console.log("nope");
+      }
+    });
 
   //console.log(email.data)
 
@@ -57,15 +67,14 @@ function Profile() {
   }, [user]);
 
 
-  
+
 
   return (
     <div>
       <Nav />
       <div className="user">
-        Name : {user} <br/>
-        Email : {user}
-        <br/>
+        Email : {localStorage.email}
+        <br />
         My saved jokes
         <br></br>
       </div>

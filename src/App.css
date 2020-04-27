@@ -38,13 +38,15 @@
 }
 
 .smolbtn {
+  margin: 50px;
   display: center;
-  background-color: inherit;
-  height: 50px;
-  width: 100px;
+  background-color: rgb(255, 140, 140);
   border: none;
   font-size: 16px;
   cursor: pointer;
+  padding: 15px;
+  border-radius: 20px;
+  color: white
 }
 
 .btn {
@@ -59,5 +61,16 @@
 
 /* On mouse-over */
 .smolbtn:hover {
-  background: lightskyblue;
+  background: rgb(231, 121, 121);
+}
+
+.randomjoke{
+  font-family: fantasy;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.search{
+  margin-left: 10%;
+  margin-right: 10%;
 }

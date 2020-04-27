@@ -86,15 +86,18 @@ export default function Search() {
   return (
     <div>
       <Nav />
-      <h4 style={mystyle}>Search For A Joke</h4>
-      <Form.Control
-        style={mystyle}
-        placeholder="Search for a Joke..."
-        ref={FocusOnSearch}
-        onChange={e => setQuery(e.target.value)}
-        value={query}
-      />
-      <div style={mystyle}>{jokeComponents}</div>
+      <div className="search">
+        <h4 style={mystyle}>Search For A Joke</h4>
+        <Form.Control
+          style={mystyle}
+          placeholder="Search for a Joke..."
+          ref={FocusOnSearch}
+          onChange={e => setQuery(e.target.value)}
+          value={query}
+        />
+        <div style={mystyle}>{jokeComponents}</div>
+      </div>
+
     </div>
   );
 }

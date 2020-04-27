@@ -57,14 +57,11 @@ class FetchRandom extends React.Component {
         {this.state.loading ? (
           <div>loading...</div>
         ) : (
-          <div>
-            <div>{this.state.joke}</div>
-          </div>
-        )}
+            <h1 className="randomjoke">{this.state.joke}</h1>
+          )}
         <button className="smolbtn" onClick={refreshPage}>
           Get another random joke
         </button>
-        <br></br>
         <button className="smolbtn" onClick={this.addToUser}>
           Save this joke
         </button>

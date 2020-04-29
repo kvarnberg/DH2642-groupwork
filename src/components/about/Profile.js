@@ -5,8 +5,8 @@ import "./profile.css";
 import { db } from "../../config/Fire";
 import { ListGroup } from "react-bootstrap";
 import trash from './bin.png'
-import "./profile.css"
-import { db } from "../../config/Fire";
+import editIcon from './edit.png'
+
 
 
 
@@ -22,16 +22,23 @@ const JokeInput = ({ joke }) => {
       .delete();
   };
 
+  const updateJoke = () => {
+    console.log(content)
+  }
+
   return (
     <ListGroup.Item action hover="true">
       {content}
+      <div style={{float:"right"}}>
       <img
-        className="trashButton"
+        className="alternativeButton"
         alt="delete button"
-        style={{ height: "15px" }}
+        style={{ height: "20px" }}
         src={trash}
         onClick={onDelete}
       />
+      <img style={{ height: "20px"}} className="alernativeButton" alt="edit button" src={editIcon} onClick={updateJoke}/>
+      </div>
     </ListGroup.Item>
   );
 };

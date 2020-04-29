@@ -54,7 +54,7 @@ function Profile() {
       if (doc.exists) {
         localStorage.setItem("email", doc.data().name);
       } else {
-        console.log("nope");
+        console.log("nah");
       }
     });
 

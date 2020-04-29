@@ -4,12 +4,10 @@ import Nav from "../nav/Nav";
 import "./profile.css";
 import { db } from "../../config/Fire";
 import { ListGroup } from "react-bootstrap";
-import trash from './bin.png'
-import editIcon from './edit.png'
+import trash from "./bin.png";
+import editIcon from "./edit.png";
 
-
-
-
+// lägg ut container i separat mapp för högre betyg
 const JokeInput = ({ joke }) => {
   const content = joke.content;
   const user = localStorage.user;
@@ -22,23 +20,16 @@ const JokeInput = ({ joke }) => {
       .delete();
   };
 
-  const updateJoke = () => {
-    console.log(content)
-  }
-
   return (
     <ListGroup.Item action hover="true">
       {content}
-      <div style={{float:"right"}}>
       <img
-        className="alternativeButton"
+        className="trashButton"
         alt="delete button"
-        style={{ height: "20px" }}
+        style={{ height: "15px" }}
         src={trash}
         onClick={onDelete}
       />
-      <img style={{ height: "20px"}} className="alernativeButton" alt="edit button" src={editIcon} onClick={updateJoke}/>
-      </div>
     </ListGroup.Item>
   );
 };
@@ -73,9 +64,6 @@ function Profile() {
         setJokes(jokesData);
       });
   }, [user]);
-
-
-
 
   return (
     <div>

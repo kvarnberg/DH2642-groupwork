@@ -94,8 +94,7 @@ class App extends React.Component {
         ) : (
           <Router>
             <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/random" component={Random} />
+              <Route path="/" exact component={Random} />
               <Route path="/search" component={Search} />
               <Route path="/profile" component={Profile} />
               <Route path="/jokes" component={JokeMaker} />

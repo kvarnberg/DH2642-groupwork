@@ -5,6 +5,7 @@ import { db } from "../../config/Fire";
 
 function Random() {
   return (
+    
     <div className="Random">
       <Nav />
       <header className="App-header">
@@ -55,6 +56,21 @@ class FetchRandom extends React.Component {
   render() {
     return (
       <div>
+        <h1>Home page</h1>
+        <h3>You are now logged in!</h3>
+        <pre></pre>
+        <pre></pre>
+        <pre></pre>
+        <pre></pre>
+        <pre></pre>
+        <pre></pre>
+        <pre></pre>
+        <pre></pre>
+        <h2 className="color">Joke Of The Day 😆</h2>
+        <pre></pre>
+        <pre></pre>
+        <pre></pre>
+
         {this.state.loading ? (
           <div>loading...</div>
         ) : (

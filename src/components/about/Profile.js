@@ -6,7 +6,7 @@ import { db } from "../../config/Fire";
 import { ListGroup } from "react-bootstrap";
 import trash from './bin.png'
 import "./profile.css"
-import { db } from "../../config/Fire";
+
 
 
 

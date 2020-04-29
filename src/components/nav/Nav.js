@@ -54,12 +54,11 @@ function Nav() {
   return (
     <div className="header">
       <Link to="/">
-        <h3>logo</h3>
+        <h3>Joke App</h3>
       </Link>
       <div className="header-right">
-        <Link to="/">home</Link>
 
-        <Link to="/random">random</Link>
+        <Link to="/">home</Link>
 
         <Link to="/search">search</Link>
 

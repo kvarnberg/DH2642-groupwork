@@ -9,7 +9,6 @@ class Home extends React.Component {
         <Nav />
         <h1>Home page</h1>
         <h3>You are now logged in</h3>
-        <div>Other users jokes:</div>
       </div>
     );
   }

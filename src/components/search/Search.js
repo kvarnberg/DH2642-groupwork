@@ -20,10 +20,10 @@ export default function Search() {
   }, []);
 
   //GETTING THE API
-  const getJokes = async query => {
+  const getJokes = async (query) => {
     var url = `https://icanhazdadjoke.com/search?term=${query}`;
     const results = await fetch(url, {
-      headers: { accept: "application/json" }
+      headers: { accept: "application/json" },
     });
     const jokes = await results.json();
     return jokes.results;
@@ -52,7 +52,7 @@ export default function Search() {
   }, [query]);
 
   //SHOW LIST OF JOKES(EVERY JOKE IN A BOX) WHEN ENTERING A WORD
-  let jokeComponents = jokes.map(AllResultsFromTheApi => {
+  let jokeComponents = jokes.map((AllResultsFromTheApi) => {
     return (
       <ListGroup.Item key={AllResultsFromTheApi.id}>
         {AllResultsFromTheApi.joke}
@@ -61,16 +61,21 @@ export default function Search() {
     );
   });
 
-  const onAdd = joke => {
-    db.collection("users")
+  const onAdd = (joke) => {
+    var docRef = db
+      .collection("users")
       .doc(user)
       .collection("savedjokes")
-      .doc(joke.id)
+      .doc(joke.id);
+
+    //gå in i collection och loopa alla id mot joke.id, sen lägg till eller inte.
+
+    docRef
       .set({ content: joke.joke, apiId: joke.id })
       .then(() => {
         alert("Joke has been added");
       })
-      .catch(error => {
+      .catch((error) => {
         alert(error.message);
       });
   };
@@ -80,7 +85,7 @@ export default function Search() {
     color: "black",
     backgroundColor: "white",
     padding: "10px",
-    fontFamily: "Times"
+    fontFamily: "Times",
   };
 
   //SHOW THE RESULT
@@ -93,12 +98,11 @@ export default function Search() {
           style={mystyle}
           placeholder="Search for a Joke..."
           ref={FocusOnSearch}
-          onChange={e => setQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
           value={query}
         />
         <div style={mystyle}>{jokeComponents}</div>
       </div>
-
     </div>
   );
 }

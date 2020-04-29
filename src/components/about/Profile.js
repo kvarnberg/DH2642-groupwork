@@ -2,14 +2,12 @@ import React from "react";
 import "../../App.css";
 import Nav from "../nav/Nav";
 import "./profile.css";
-import { db } from "../../config/Fire";
 import { ListGroup } from "react-bootstrap";
-import trash from './bin.png'
-import "./profile.css"
+import trash from "./bin.png";
+import "./profile.css";
 import { db } from "../../config/Fire";
 
-
-
+// lägg ut container i separat mapp för högre betyg
 const JokeInput = ({ joke }) => {
   const content = joke.content;
   const user = localStorage.user;
@@ -20,6 +18,10 @@ const JokeInput = ({ joke }) => {
       .collection("savedjokes")
       .doc(joke.id)
       .delete();
+  };
+
+  const onUpdate = () => {
+    console.log("Edit: " + joke.id + content);
   };
 
   return (
@@ -66,9 +68,6 @@ function Profile() {
         setJokes(jokesData);
       });
   }, [user]);
-
-
-
 
   return (
     <div>

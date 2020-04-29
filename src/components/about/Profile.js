@@ -5,14 +5,13 @@ import "./profile.css";
 import { db } from "../../config/Fire";
 import { ListGroup } from "react-bootstrap";
 import trash from './bin.png'
-import "./profile.css"
-
-
+import editIcon from './edit.png'
 
 
 const JokeInput = ({ joke }) => {
   const content = joke.content;
   const user = localStorage.user;
+  const [newJokeContent, setNewJokeContent] = React.useState("");
 
   const onDelete = () => {
     db.collection("users")
@@ -21,19 +20,29 @@ const JokeInput = ({ joke }) => {
       .doc(joke.id)
       .delete();
   };
+  // göra nytt joke och ta bort den gamla
+  const updateJoke = () => {
+    db.collection("users")
+      .doc(user)
+      .collection("savedjokes")
+      .add({ content: newJokeContent + " " });
+  };
 
-  return (
-    <ListGroup.Item action hover="true">
-      {content}
+return (
+  <ListGroup.Item action hover="true">
+    {content}
+    <div style={{ float: "right" }}>
       <img
-        className="trashButton"
+        className="alternativeButton"
         alt="delete button"
-        style={{ height: "15px" }}
+        style={{ height: "20px" }}
         src={trash}
         onClick={onDelete}
       />
-    </ListGroup.Item>
-  );
+      <img style={{ height: "20px" }} className="alernativeButton" alt="edit button" src={editIcon} onClick={updateJoke} />
+    </div>
+  </ListGroup.Item>
+);
 };
 
 function Profile() {
@@ -47,7 +56,7 @@ function Profile() {
       if (doc.exists) {
         localStorage.setItem("email", doc.data().name);
       } else {
-        console.log("nope");
+        console.log("ignore");
       }
     });
 

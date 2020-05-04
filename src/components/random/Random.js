@@ -4,10 +4,10 @@ import "./random.css";
 
 import Nav from "../nav/Nav";
 import { db } from "../../config/Fire";
+import firebase from "firebase";
 
 function Random() {
   return (
-
     <div className="Random">
       <Nav />
       <header className="App-header">
@@ -42,16 +42,34 @@ class FetchRandom extends React.Component {
 
   addToUser = () => {
     const user = localStorage.user;
-    db.collection("users")
+    var docRef = db
+      .collection("users")
       .doc(user)
       .collection("savedjokes")
-      .doc(this.state.id)
-      .set({ content: this.state.joke, apiId: this.state.id })
-      .then(() => {
-        alert("Joke has been added");
+      .doc(this.state.id);
+
+    docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          alert("Could not add. Joke already in your list.");
+        } else {
+          docRef
+            .set({
+              content: this.state.joke,
+              apiId: this.state.id,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+            .then(() => {
+              alert("Joke has been added");
+            })
+            .catch((error) => {
+              alert(error.message);
+            });
+        }
       })
       .catch((error) => {
-        alert(error.message);
+        console.log("Error getting document:", error);
       });
   };
 

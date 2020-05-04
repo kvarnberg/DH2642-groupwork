@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, ListGroup } from "react-bootstrap";
 import Nav from "../nav/Nav";
 import { db } from "../../config/Fire";
+import firebase from "firebase";
 
 //EXPORT
 export default function Search() {
@@ -71,12 +72,27 @@ export default function Search() {
     //gå in i collection och loopa alla id mot joke.id, sen lägg till eller inte.
 
     docRef
-      .set({ content: joke.joke, apiId: joke.id })
-      .then(() => {
-        alert("Joke has been added");
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          alert("Could not add. Joke already in your list.");
+        } else {
+          docRef
+            .set({
+              content: joke.joke,
+              apiId: joke.id,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+            .then(() => {
+              alert("Joke has been added");
+            })
+            .catch((error) => {
+              alert(error.message);
+            });
+        }
       })
-      .catch((error) => {
-        alert(error.message);
+      .catch(function (error) {
+        console.log("Error getting document:", error);
       });
   };
 

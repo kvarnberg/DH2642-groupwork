@@ -60,7 +60,10 @@ function Jokes() {
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
-      .add({ content: newJokeContent + " " });
+      .add({
+        content: newJokeContent + " ",
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      });
   };
 
   const myStyle = {

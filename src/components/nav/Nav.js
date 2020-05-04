@@ -57,12 +57,11 @@ function Nav() {
         <h3 className="title">Joke App</h3>
       </Link>
       <div className="header-right">
-
         <Link to="/">home</Link>
 
         <Link to="/search">search</Link>
 
-        <Link to="/jokes">jokes</Link>
+        <Link to="/jokes">create joke</Link>
 
         <Link to="/profile">
           <img src={profile} style={{ height: "20px" }} alt="profile" />

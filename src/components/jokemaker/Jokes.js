@@ -25,7 +25,7 @@ function Jokes() {
   }, [user]);
 
   const onCreate = () => {
-    alert("Joke added")
+    alert("Joke added");
     const db = firebase.firestore();
     db.collection("users")
       .doc(user)
@@ -40,19 +40,6 @@ function Jokes() {
     <div className="content-container">
       <div className="form">
         <h3 className="header">Add a joke</h3>
-
-        <input
-          type="text"
-          placeholder="   Enter your name"
-          autoFocus
-          className="text-input"
-        />
-
-        <input
-          type="text"
-          placeholder="   Category of joke"
-          className="text-input"
-        />
 
         <textarea
           placeholder="Enter your joke here"

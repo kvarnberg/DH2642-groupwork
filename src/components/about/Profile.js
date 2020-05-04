@@ -14,11 +14,15 @@ const JokeInput = ({ joke }) => {
   const [newJokeContent, setNewJokeContent] = React.useState("");
 
   const onDelete = () => {
-    db.collection("users")
-      .doc(user)
-      .collection("savedjokes")
-      .doc(joke.id)
-      .delete();
+    var alert = window.confirm('Are you sure you want to delete?')
+    if (alert) {
+      db.collection("users")
+        .doc(user)
+        .collection("savedjokes")
+        .doc(joke.id)
+        .delete();
+    }
+
   };
   // göra nytt joke och ta bort den gamla
   const updateJoke = () => {
@@ -28,21 +32,21 @@ const JokeInput = ({ joke }) => {
       .add({ content: newJokeContent + " " });
   };
 
-return (
-  <ListGroup.Item action hover="true">
-    {content}
-    <div style={{ float: "right" }}>
-      <img
-        className="alternativeButton"
-        alt="delete button"
-        style={{ height: "20px" }}
-        src={trash}
-        onClick={onDelete}
-      />
-      <img style={{ height: "20px" }} className="alernativeButton" alt="edit button" src={editIcon} onClick={updateJoke} />
-    </div>
-  </ListGroup.Item>
-);
+  return (
+    <ListGroup.Item action hover="true">
+      {content}
+      <div style={{ float: "right" }}>
+        <img
+          className="alternativeButton"
+          alt="delete button"
+          style={{ height: "20px" }}
+          src={trash}
+          onClick={onDelete}
+        />
+        <img style={{ height: "20px" }} className="alernativeButton" alt="edit button" src={editIcon} onClick={updateJoke} />
+      </div>
+    </ListGroup.Item>
+  );
 };
 
 function Profile() {
@@ -82,18 +86,23 @@ function Profile() {
   return (
     <div>
       <Nav />
-      <div className="user">
-        Email : {localStorage.email}
+      <div className="savedJokes"> 
+        <div className="savedHeader">
+          SAVED JOKES
+
+        </div>
         <br />
-        My saved jokes
-        <br></br>
-      </div>
+        <div>
+          My email : {localStorage.email}
+        </div>
+
       <div className="jokes">
         {jokes.map((joke) => (
           <div key={joke.id}>
             <JokeInput joke={joke} />
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

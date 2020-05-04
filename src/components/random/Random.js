@@ -1,11 +1,13 @@
 import React from "react";
 import "../../App.css";
+import "./random.css";
+
 import Nav from "../nav/Nav";
 import { db } from "../../config/Fire";
 
 function Random() {
   return (
-    
+
     <div className="Random">
       <Nav />
       <header className="App-header">
@@ -55,33 +57,26 @@ class FetchRandom extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Home page</h1>
-        <h3>You are now logged in!</h3>
-        <pre></pre>
-        <pre></pre>
-        <pre></pre>
-        <pre></pre>
-        <pre></pre>
-        <pre></pre>
-        <pre></pre>
-        <pre></pre>
-        <h2 className="color">Joke Of The Day 😆</h2>
-        <pre></pre>
-        <pre></pre>
-        <pre></pre>
-
+      <div className="random">
         {this.state.loading ? (
-          <div>loading...</div>
+
+          <div className="loading">
+            loading...
+            <br />
+            <img src="https://stickershop.line-scdn.net/stickershop/v1/product/3068477/LINEStorePC/main.png;compress=true" />
+
+          </div>
         ) : (
-            <h1 className="randomjoke">{this.state.joke}</h1>
+            <div>
+              <h1 className="randomjoke">{this.state.joke}</h1>
+              <button className="randomButton" onClick={refreshPage}>
+                <a> Get another random joke</a>
+              </button>
+              <button className="saveRandomButton" onClick={this.addToUser}>
+                <a> Save this joke</a>
+              </button>
+            </div>
           )}
-        <button className="smolbtn" onClick={refreshPage}>
-          Get another random joke
-        </button>
-        <button className="smolbtn" onClick={this.addToUser}>
-          Save this joke
-        </button>
       </div>
     );
   }

@@ -1,0 +1,78 @@
+
+.App-header {
+    background-color: rgb(240, 203, 84);
+  }
+
+.loading{
+    color: white;
+    -webkit-text-stroke: 0.7px white;
+    text-shadow: 1px 1px 4px #000000;
+}
+.randomjoke{
+    font-weight: bold;
+    color: white;
+    -webkit-text-stroke: 1.5px white;
+    text-shadow: 2px 2px 4px #444444;
+
+
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+
+.randomButton {
+    color:white;
+
+    font-size: large;
+    background-color: rgb(112, 209, 87);
+    border: 1px solid rgb(112, 209, 87);
+    border-radius: 30px;
+    box-shadow: 0px 5px 0px rgb(90, 167, 71);
+    position: relative;
+    top: 0px;
+    transition: all ease 0.1s;
+    margin: 5%;
+    padding: 15px 25px 15px 25px;
+  }
+  /* On mouse-over */
+  .randomButton:hover {
+    background-color:   rgb(99, 184, 78);  
+    border: 1px solid  rgb(99, 184, 78);
+  
+  }
+  /* When clicking */
+  .randomButton:active {
+    background-color:rgb(99, 184, 78);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  
+  .saveRandomButton {
+    color:white;
+    font-size: large;
+    background-color: rgb(61, 121, 231);
+    border: 1px solid rgb(61, 121, 231);
+    border-radius: 30px;
+    box-shadow: 0px 5px 0px rgb(42, 90, 179);
+    position: relative;
+    top: 0px;
+    transition: all ease 0.1s;
+    margin: 5%;
+    padding: 15px 25px 15px 25px;
+  }
+  /* On mouse-over */
+  .saveRandomButton:hover {
+    background-color: rgb(52, 109, 214);  
+    border: 1px solid rgb(52, 109, 214);
+  
+  }
+  /* When clicking */
+  .saveRandomButton:active {
+    background-color: rgb(52, 109, 214);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  .randomHeader{
+    color: grey;
+  }
+
+  

@@ -1,0 +1,30 @@
+.search{
+    margin-top:2% ;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+.saveButton{
+    float: right;
+    background-color: rgb(240, 203, 84);
+    border-radius: 20px;
+    font-size: small;
+    padding:  5px 20px  5px 20px;
+    border-style: none;
+}
+.saveButton:hover{
+    background-color:rgb(231, 186, 39);
+
+}
+body{
+    background-image: url('https://opengameart.org/sites/default/files/sky1.png');
+}
+
+.searchHeader{
+    color: white;
+    margin-top: 50px;
+    font-size: 30px;
+
+
+
+}

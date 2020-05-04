@@ -4,37 +4,6 @@ import trashIcon from "./trash.png";
 import { ListGroup } from "react-bootstrap";
 import "./addjoke.css";
 
-const JokeInput = ({ joke }) => {
-  const content = joke.content;
-  const user = localStorage.user;
-
-  const onDelete = () => {
-    const db = firebase.firestore();
-    db.collection("users")
-      .doc(user)
-      .collection("savedjokes")
-      .doc(joke.id)
-      .delete();
-  };
-
-  return (
-    <table>
-      <tr>
-        <td>
-          {content + "    "}
-          <img
-            style={{ height: "18px" }}
-            src={trashIcon}
-            alt="delete button"
-            // src="https://img.icons8.com/carbon-copy/30/000000/filled-trash.png"
-            onClick={onDelete}
-          />
-        </td>
-      </tr>
-    </table>
-  );
-};
-
 function Jokes() {
   const [jokes, setJokes] = React.useState([]);
   const [newJokeContent, setNewJokeContent] = React.useState("");
@@ -56,15 +25,12 @@ function Jokes() {
   }, [user]);
 
   const onCreate = () => {
+    alert("Joke added")
     const db = firebase.firestore();
     db.collection("users")
       .doc(user)
       .collection("savedjokes")
       .add({ content: newJokeContent + " " });
-  };
-
-  const myStyle = {
-    flexDirection: "column",
   };
 
   return (
@@ -97,15 +63,6 @@ function Jokes() {
           </button>
         </div>
       </div>
-
-      <h3 className="header">Your added jokes</h3>
-      <table>
-        {jokes.map((joke) => (
-          <tbody style={myStyle} key={joke.id}>
-            <JokeInput joke={joke} />
-          </tbody>
-        ))}
-      </table>
     </div>
   );
 }

@@ -54,7 +54,7 @@ function Nav() {
   return (
     <div className="header">
       <Link to="/">
-        <h3>Joke App</h3>
+        <h3 className="title">Joke App</h3>
       </Link>
       <div className="header-right">
 

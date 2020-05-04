@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, ListGroup } from "react-bootstrap";
 import Nav from "../nav/Nav";
 import { db } from "../../config/Fire";
+import "./search.css";
+
 
 //EXPORT
 export default function Search() {
@@ -56,7 +58,7 @@ export default function Search() {
     return (
       <ListGroup.Item key={AllResultsFromTheApi.id}>
         {AllResultsFromTheApi.joke}
-        <button onClick={() => onAdd(AllResultsFromTheApi)}>Save</button>
+        <button onClick={() => onAdd(AllResultsFromTheApi)} className="saveButton">Save</button>
       </ListGroup.Item>
     );
   });
@@ -83,9 +85,8 @@ export default function Search() {
   //STYLING THE RESULT
   const mystyle = {
     color: "black",
-    backgroundColor: "white",
     padding: "10px",
-    fontFamily: "Times",
+    
   };
 
   //SHOW THE RESULT
@@ -93,10 +94,10 @@ export default function Search() {
     <div>
       <Nav />
       <div className="search">
-        <h4 style={mystyle}>Search For A Joke</h4>
+        <h4 className="searchHeader">Search For A Joke</h4>
         <Form.Control
           style={mystyle}
-          placeholder="Search for a Joke..."
+          placeholder="for example cat, dad, pizza ..."
           ref={FocusOnSearch}
           onChange={(e) => setQuery(e.target.value)}
           value={query}

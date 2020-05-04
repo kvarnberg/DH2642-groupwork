@@ -2,18 +2,27 @@
     margin:20px;
     text-decoration: none;
     list-style-type:none;
-    margin-left: 20%;
-    margin-right: 20%;
-
-
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
-.trashButton{
+.alternativeButton{
     float: right;
+    margin: 0px 0px 0px 10px ;
 }
 
-.user{
-    margin-top: 2%;
-    font-size: 22px;
-    font-weight: bold;
+.savedJokes{
+    margin-top: 3%;
+    background-color:rgb(240, 240, 240);
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 40px;
+    padding: 10px;
+}
+.savedHeader{
+    color: rgb(145, 196, 130);
+    -webkit-text-stroke: 0.8px rgb(145, 196, 130);
+    margin-top: 20px;
+    font-size: 25px;
+    background-color: none;
 }

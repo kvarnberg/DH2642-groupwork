@@ -26,18 +26,30 @@ class FetchRandom extends React.Component {
       id: "",
     };
   }
-
+  abortController = new AbortController();
   async componentDidMount() {
-    const url = "https://icanhazdadjoke.com/";
-    const response = await fetch(url, {
-      headers: { accept: "application/json" },
-    });
-    const data = await response.json();
-    this.setState({
-      loading: false,
-      joke: data.joke,
-      id: data.id,
-    });
+    try {
+      const url = "https://icanhazdadjoke.com/";
+      const response = await fetch(url, {
+        signal: this.abortController.signal,
+        headers: { accept: "application/json" },
+      });
+      const data = await response.json();
+      this.setState({
+        loading: false,
+        joke: data.joke,
+        id: data.id,
+      });
+    } catch (err) {
+      if (err.name === "AbortError") {
+      } else {
+        throw err;
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.abortController.abort();
   }
 
   addToUser = () => {
@@ -77,24 +89,25 @@ class FetchRandom extends React.Component {
     return (
       <div className="random">
         {this.state.loading ? (
-
           <div className="loading">
             loading...
             <br />
-            <img src="https://stickershop.line-scdn.net/stickershop/v1/product/3068477/LINEStorePC/main.png;compress=true" />
-
+            <img
+              alt="loading"
+              src="https://stickershop.line-scdn.net/stickershop/v1/product/3068477/LINEStorePC/main.png;compress=true"
+            />
           </div>
         ) : (
-            <div>
-              <h1 className="randomjoke">{this.state.joke}</h1>
-              <button className="randomButton" onClick={refreshPage}>
-                <a> Get another random joke</a>
-              </button>
-              <button className="saveRandomButton" onClick={this.addToUser}>
-                <a> Save this joke</a>
-              </button>
-            </div>
-          )}
+          <div>
+            <h1 className="randomjoke">{this.state.joke}</h1>
+            <button className="randomButton" onClick={refreshPage}>
+              Get another random joke
+            </button>
+            <button className="saveRandomButton" onClick={this.addToUser}>
+              Save this joke
+            </button>
+          </div>
+        )}
       </div>
     );
   }

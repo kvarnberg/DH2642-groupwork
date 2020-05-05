@@ -7,7 +7,6 @@ import { ListGroup } from "react-bootstrap";
 import trash from "./bin.png";
 import editIcon from "./edit.png";
 import firebase from "firebase";
-import { Input } from "react";
 
 const JokeInput = ({ joke }) => {
   const content = joke.content;
@@ -105,6 +104,7 @@ const JokeInput = ({ joke }) => {
 function Profile() {
   const [jokes, setJokes] = React.useState([]);
   const user = localStorage.user;
+
   // hämta namn och email
   db.collection("users")
     .doc(user)
@@ -124,6 +124,7 @@ function Profile() {
       .collection("users")
       .doc(user)
       .collection("savedjokes")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         const jokesData = [];
         snapshot.forEach((doc) =>

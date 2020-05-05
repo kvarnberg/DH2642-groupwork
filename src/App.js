@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Home from "./components/home/Home";
 import Random from "./components/random/Random";
 import Search from "./components/search/Search";
 import Profile from "./components/about/Profile";
@@ -26,14 +25,12 @@ class App extends React.Component {
 
   authListener() {
     auth.onAuthStateChanged((user) => {
-      // console.log(user);
       if (user) {
         this.setState({ user });
         localStorage.setItem("user", user.uid);
       } else {
         this.setState({ user: null });
         localStorage.removeItem("user");
-        console.log("not logged in");
       }
     });
   }
@@ -42,9 +39,7 @@ class App extends React.Component {
     e.preventDefault();
     auth
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((u) => {
-        console.log(u.user.uid);
-      })
+      .then((u) => {})
       .catch((error) => {
         alert(error);
       });
@@ -109,23 +104,4 @@ class App extends React.Component {
     );
   }
 }
-
-/*make a home component in different file*/
-
-/* <Router>
-        <div className="App">
-          <Nav />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/random" component={Random} />
-            <Route path="/search" component={Search} />
-            <Route path="/about" component={About} />
-            <Route path="/register" component={Register} />
-            <Route
-              path="*"
-              component={() => "404 NOT FOUND IN THIS APP-UNIVERSE"}
-            />
-          </Switch>
-        </div>
-      </Router>*/
 export default App;
